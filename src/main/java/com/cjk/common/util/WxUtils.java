@@ -1,8 +1,13 @@
 package com.cjk.common.util;
 
+import com.cjk.common.enums.WxEnum;
 import com.cjk.common.exception.AesException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WxUtils {
+
+    private static Logger logger = LoggerFactory.getLogger(WxUtils.class);
 
 	 /**
      * 验证Token
@@ -17,6 +22,7 @@ public class WxUtils {
             throws AesException {
 
         String signature = SHA1.getSHA1(WxEnum.WX_TOKEN.getCode(), timeStamp, nonce);
+        logger.debug("SHA1 finished, generate signature =  {}", signature);
         if (!signature.equals(msgSignature)) {
             throw new AesException(AesException.ValidateSignatureError);
         }

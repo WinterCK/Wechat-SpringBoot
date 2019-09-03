@@ -1,11 +1,14 @@
 package com.cjk.common.util;
 
 import com.cjk.common.exception.AesException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
 import java.util.Arrays;
 
 public class SHA1 {
+    private static Logger logger = LoggerFactory.getLogger(SHA1.class);
     /**
      * 用SHA1算法验证Token
      *
@@ -25,10 +28,12 @@ public class SHA1 {
                 sb.append(array[i]);
             }
             String str = sb.toString();
+            logger.debug("sort finished , args = {}", str);
             // SHA1签名生成
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             md.update(str.getBytes());
             byte[] digest = md.digest();
+            logger.debug("SHA1 digest = {}" + new String(digest));
 
             StringBuffer hexstr = new StringBuffer();
             String shaHex = "";
@@ -41,6 +46,7 @@ public class SHA1 {
             }
             return hexstr.toString();
         } catch (Exception e) {
+            logger.error("SHA1 error, please try again later ", e);
             e.printStackTrace();
             throw new AesException(AesException.ComputeSignatureError);
         }
