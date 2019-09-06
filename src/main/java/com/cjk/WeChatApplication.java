@@ -19,15 +19,6 @@ public class WeChatApplication {
 		SpringApplication.run(WeChatApplication.class, args);
 	}
 	
-//	@Value("${server.port}")
-//	private String port;
-//
-//	@RequestMapping("/hello")
-//	@ResponseBody
-//	public String satHello(){
-//		return "turn to spring boot is success, it's from " + port;
-//
-//	}
 
 	@Bean
 	public StringHttpMessageConverter stringHttpMessageConverter() {

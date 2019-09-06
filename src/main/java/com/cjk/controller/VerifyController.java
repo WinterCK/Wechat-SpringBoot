@@ -3,7 +3,6 @@ package com.cjk.controller;
 import com.cjk.common.util.WxUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,21 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-//@RequestMapping("/")
 public class VerifyController {
 
     private Logger logger = LoggerFactory.getLogger(VerifyController.class);
-
-    @Value("${server.port}")
-    private String port;
-
-    @RequestMapping("/hello")
-    @ResponseBody
-    public String satHello(){
-        return "turn to spring boot is success, it's from " + port;
-
-    }
-
 
     @RequestMapping(value = "/wxServer", method= RequestMethod.GET, produces="text/html; charset=UTF-8")
     @ResponseBody
@@ -47,7 +34,7 @@ public class VerifyController {
         else {
             if (WxUtils.checkSignature(signature, timestamp, nonce))
             {
-                logger.debug("valid!");
+                logger.debug("valid success!");
                 return echostr;
             }
             else
@@ -55,8 +42,6 @@ public class VerifyController {
         }
 
     }
-    @RequestMapping("/index")
-    public String index() {
-        return "index";
-    }
+    
+    
 }

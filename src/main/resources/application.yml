@@ -1,0 +1,5 @@
+server: 
+  port: 80
+wx: 
+  appid: wx01c177ab92131ded
+  secret: 72caab2849e56507aa62740590e9f0f4
